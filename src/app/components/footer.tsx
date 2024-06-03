@@ -23,7 +23,7 @@ export default function Footer() {
                 <div className="grid flex justify-items-center">
                     <p className="font-bold">Contact</p>
                     <p>Vous souhaitez en savoir plus ou nous rencontrer ?</p>
-                    <p> N'hésitez pas à nous contacter !</p>
+                    <p> N&apos;h&#233;sitez pas &#224; nous contacter&nbsp;!</p>
                 </div>
                 <div className="grid justify-items-center ">
                     <div className="my-2 flex gap-5">
@@ -42,14 +42,14 @@ export default function Footer() {
 
 
             <div className="flex bg-darkGreen py-2">
-                <div className="flex-1">©CES'EAT - 2024</div>
+                <div className="flex-1">&copy;CES&apos;EAT - 2024</div>
                 <div>
                 <a
                     title="Consulter les mentions légales"
                     onClick={openModal}
                     className="cursor-pointer text-blue-500"
                 >
-                    <span>Mentions légales</span>
+                    <span>Mentions l&eacute;gales</span>
                 </a>
 
                 <LegalModal isOpen={isModalOpen} closeModal={closeModal} />
