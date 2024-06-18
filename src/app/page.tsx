@@ -17,7 +17,7 @@ const Register: React.FC = () => {
 
     return (
         <NextUIProvider className="flex flex-col min-h-screen bg-beige">
-            <Header title={"Livreur"} />
+            <Header title={"Restaurateur"} />
             <div className='container mx-auto mt-6 flex-grow'>
                 {!connectPage &&
                     <div>
