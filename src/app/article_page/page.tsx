@@ -17,7 +17,7 @@ import ActionButtonModifyArticle from "../components/actionButtonTable/actionBut
 import ActionButtonDeleteArticle from "../components/actionButtonTable/actionButtonDeleteArticle";
 import { Menu } from "../types/menu";
 
-export var disabledArticlesList: any = []
+export var disabledArticlesList: any[] = []
 
 export default function Home() {
   const [articlesList, setArticlesList] = useState<Article[]>([]);
@@ -40,7 +40,7 @@ export default function Home() {
           (menu: Menu) => menu.id_restorer === decoded?.id_user
         ).map((menu: Menu) => {return menu.id_dish});
         disabledArticlesList = ([...new Set(filteredMenus)]);
-        console.log()
+        console.log(disabledArticlesList)
       } catch (err) {
         console.error(err);
         setError("Failed to fetch menus.");
