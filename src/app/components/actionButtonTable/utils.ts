@@ -1,32 +1,66 @@
-import jwt, { JwtPayload } from "jsonwebtoken";
-
-export default function updateDriver(orderId: string) {
-
-  const accessToken = localStorage.getItem('accessToken')
-  const decoded: JwtPayload = jwt.verify(accessToken!, 'access_secret_jwt') as JwtPayload;
-
-  const updateDriver = async () => {
+export function updateStatusToInProgress(order_id: number) {
+  const updateOrderStatus = () => {
     try {
-      const response = await fetch(
-        "http://localhost:4000/order/assignDeliveryman",
+      const response = fetch(
+        "http://localhost:4000/order/updateOrderStatus",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            idOrder: orderId,
-            idDriver: decoded.userId,
-            nameDriver: decoded.name,
-            phoneDriver: decoded.phone,
-
-          })
+            idOrder: order_id,
+            newStatus: "En cours de préparation",
+          }),
         }
       );
     } catch (err) {
       console.error(err);
     }
   };
-  updateDriver();
+  updateOrderStatus();
+}
 
+export function deteleArticle(id_article: number) {
+  const deteleArticle = () => {
+    try {
+      const response = fetch(
+        "http://localhost:4000/article/deleteArticle",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id_article: id_article,
+          }),
+        }
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  deteleArticle();
+}
+
+export function deleteMenu(id_menu: number) {
+  const deleteMenu = () => {
+    try {
+      const response = fetch(
+        "http://localhost:4000/menu/deleteMenu",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id_menu: id_menu,
+          }),
+        }
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  deleteMenu();
 }

@@ -4,17 +4,21 @@ import { NextUIProvider } from "@nextui-org/system";
 import Header from "../components/header/header";
 import Footer from "../components/footer/footer";
 import CustomTable from "../components/table/table";
-import { Card, CardBody, CardHeader } from "@nextui-org/react";
+import { Button, Card, CardBody, CardHeader, Link } from "@nextui-org/react";
 import { FaBoxesStacked } from "react-icons/fa6";
 import { Options } from "../interfaces/table";
 import { propsTable } from "@/app/interfaces/table";
 import { useEffect, useState } from "react";
 import { Menu } from "../types/menu";
+import { Article } from "../types/article";
 import MoonLoader from "react-spinners/MoonLoader";
 import { decodeAccessToken, dicoCategoryMenu } from "../utils/utils";
+import ActionButtonModifyMenu from "../components/actionButtonTable/actionButtonModifyMenu";
+import ActionButtonDeleteMenu from "../components/actionButtonTable/actionButtonDeleteMenu";
 
 export default function Home() {
   const [menusList, setMenusList] = useState<Menu[]>([]);
+  const [articlesList, setArticlesList] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -44,6 +48,34 @@ export default function Home() {
     fetchMenus();
   }, []);
 
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    const decoded = decodeAccessToken(accessToken);
+    const fetchArticles = async () => {
+      try {
+        const response = await fetch("http://localhost:4000/article/getArticles", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+
+        const filteredArticle = data.filter(
+          (article: Article) => article.id_restorer === decoded?.id_user
+        );
+        setArticlesList(filteredArticle);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to fetch menus.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchArticles();
+  }, []);
+
+
   const INITIAL_VISIBLE_COLUMNS = [
     "name",
     "price",
@@ -56,15 +88,15 @@ export default function Home() {
     id: item.id_menu, //We always need an unique id, but it is never shown. Make sure to used an unique key as value.
     name: item.name_menu,
     price: item.price_menu,
-    category: dicoCategoryMenu[item.category].value ,
-    dish_id: item.id_dish,
+    category: dicoCategoryMenu[item.category-1].value ,
+    dish_id: articlesList.find((article) => article.id_article == item.id_dish)?.name_article,
   }));
 
   const columns = [
-    { name: "Nom du Menu", uid: "name" },
+    { name: "Nom du Menu", uid: "name", sortable: true },
     { name: "Prix du Menu", uid: "price" },
-    { name: "Type du Menu", uid: "category" },
-    { name: "Menu principal", uid: "dish_id" },
+    { name: "Type du Menu", uid: "category", sortable: true },
+    { name: "Menu principal", uid: "dish_id", sortable: true },
     { name: "Actions", uid: "actions" }, //Always here
   ];
 
@@ -104,16 +136,20 @@ export default function Home() {
 
         {!loading && (
           <Card className="m-8">
-            <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+            <CardHeader className="flex flex-row justify-between pb-0 pt-2 px-4 items-start">
               <h4 className="flex items-center font-bold text-large gap-2">
                 <FaBoxesStacked />
                 Vos Menus
               </h4>
+              <Button
+              as={Link}
+              href="/modify_menu"
+              >Ajouter un nouveau menu</Button>
             </CardHeader>
             <CardBody>
               <CustomTable
                 props={props}
-                actionButtons={[]}
+                actionButtons={[ActionButtonModifyMenu, ActionButtonDeleteMenu]}
               />
             </CardBody>
           </Card>

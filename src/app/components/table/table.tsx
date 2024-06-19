@@ -15,11 +15,9 @@ import {
   Pagination,
   Selection,
   SortDescriptor,
-  Tooltip,
 } from "@nextui-org/react";
-import { FaChevronDown, FaMagnifyingGlass, FaCheck } from "react-icons/fa6";
+import { FaChevronDown, FaMagnifyingGlass } from "react-icons/fa6";
 import { propsTable } from "@/app/interfaces/table";
-/* import parse from "html-react-parser"; */
 
 export default function CustomTable({
   props,
@@ -278,6 +276,7 @@ export default function CustomTable({
           <TableColumn
             key={column.uid}
             align={column.uid === "actions" ? "center" : "start"}
+            {...(column.sortable== true ? {allowsSorting : true} : {allowsSorting: false})}
           >
             {column.name}
           </TableColumn>

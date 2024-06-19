@@ -4,7 +4,7 @@ import { NextUIProvider } from "@nextui-org/system";
 import Header from "../components/header/header";
 import Footer from "../components/footer/footer";
 import CustomTable from "../components/table/table";
-import { Card, CardBody, CardHeader } from "@nextui-org/react";
+import { Button, Card, CardBody, CardHeader, Link } from "@nextui-org/react";
 import { FaBoxesStacked } from "react-icons/fa6";
 import { Options } from "../interfaces/table";
 import { propsTable } from "@/app/interfaces/table";
@@ -13,11 +13,43 @@ import { Article } from "../types/article";
 import MoonLoader from "react-spinners/MoonLoader";
 import { decodeAccessToken } from "../utils/utils";
 import { capitalize } from "../utils/capitalize";
+import ActionButtonModifyArticle from "../components/actionButtonTable/actionButtonModifyArticle";
+import ActionButtonDeleteArticle from "../components/actionButtonTable/actionButtonDeleteArticle";
+import { Menu } from "../types/menu";
+
+export var disabledArticlesList: any = []
 
 export default function Home() {
   const [articlesList, setArticlesList] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    const decoded = decodeAccessToken(accessToken);
+    const fetchMenus = async () => {
+      try {
+        const response = await fetch("http://localhost:4000/menu/getMenus", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        const filteredMenus = data.filter(
+          (menu: Menu) => menu.id_restorer === decoded?.id_user
+        ).map((menu: Menu) => {return menu.id_dish});
+        disabledArticlesList = ([...new Set(filteredMenus)]);
+        console.log()
+      } catch (err) {
+        console.error(err);
+        setError("Failed to fetch menus.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchMenus();
+  }, []);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -31,8 +63,6 @@ export default function Home() {
           },
         });
         const data = await response.json();
-        console.log("data : ", data);
-        
 
         const filteredArticle = data.filter(
           (article: Article) => article.id_restorer === decoded?.id_user
@@ -63,9 +93,9 @@ export default function Home() {
   }));
 
   const columns = [
-    { name: "Nom du Menu", uid: "name" },
+    { name: "Nom du Menu", uid: "name", sortable: true },
     { name: "Prix du Menu", uid: "price" },
-    { name: "Type du Menu", uid: "category" },
+    { name: "Type du Menu", uid: "category", sortable: true },
     { name: "Actions", uid: "actions" }, //Always here
   ];
 
@@ -109,16 +139,20 @@ export default function Home() {
 
         {!loading && (
           <Card className="m-8">
-            <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-              <h4 className="flex items-center font-bold text-large gap-2">
+            <CardHeader className="flex flex-row justify-between pb-0 pt-2 px-4 items-start">
+              <h4 className="flex items-center font-bold text-large gap-2 ">
                 <FaBoxesStacked />
                 Vos Articles
               </h4>
+              <Button
+              as={Link}
+              href="/modify_article"
+              >Ajouter un nouvel article</Button>
             </CardHeader>
             <CardBody>
               <CustomTable
                 props={props}
-                actionButtons={[]}
+                actionButtons={[ActionButtonModifyArticle, ActionButtonDeleteArticle]}
               />
             </CardBody>
           </Card>
