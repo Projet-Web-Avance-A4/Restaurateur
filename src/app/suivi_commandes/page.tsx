@@ -13,6 +13,7 @@ import { Order } from "../types/order";
 import MoonLoader from "react-spinners/MoonLoader";
 import { decodeAccessToken } from "../utils/utils";
 import actionButtonStartOrder from "../components/actionButtonTable/actionButtonStartOrder"
+import NotificationSponsorPoints from "../components/sponsorPoints/sponsorPoints";
 
 export default function Home() {
   const [ordersList, setOrdersList] = useState<Order[]>([]);
@@ -137,6 +138,7 @@ export default function Home() {
           </Card>
         )}
       </main>
+      <NotificationSponsorPoints />
       <Footer />
     </NextUIProvider>
   );

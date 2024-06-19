@@ -16,6 +16,7 @@ import { capitalize } from "../utils/capitalize";
 import ActionButtonModifyArticle from "../components/actionButtonTable/actionButtonModifyArticle";
 import ActionButtonDeleteArticle from "../components/actionButtonTable/actionButtonDeleteArticle";
 import { Menu } from "../types/menu";
+import NotificationSponsorPoints from "../components/sponsorPoints/sponsorPoints";
 
 export var disabledArticlesList: any = []
 
@@ -158,6 +159,7 @@ export default function Home() {
           </Card>
         )}
       </main>
+      <NotificationSponsorPoints />
       <Footer />
     </NextUIProvider>
   );
