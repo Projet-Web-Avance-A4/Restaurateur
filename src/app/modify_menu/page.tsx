@@ -148,8 +148,6 @@ export default function Home() {
   }
 
   return (
-    <NextUIProvider className="min-h-screen bg-beige flex flex-col justify-between">
-      <Header title="Restaurateur" showMyAccount={true} showStats={true} />
       <div className="flex flex-grow justify-center items-center">
         <div className="container mx-auto p-4 md:p-0">
           <div className="md:flex justify-center">
@@ -237,7 +235,5 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Footer />
-    </NextUIProvider>
   );
 }
