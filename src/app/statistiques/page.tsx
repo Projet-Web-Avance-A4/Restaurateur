@@ -139,7 +139,6 @@ export default function Home() {
               <FaBoxesStacked />
               Votre statistiques
             </h4>
-            <Button onClick={() => console.log(stats)}>Test</Button>
           </CardHeader>
           <CardBody>
             <CustomTable props={props} actionButtons={[]} />
