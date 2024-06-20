@@ -17,39 +17,11 @@ import ActionButtonModifyArticle from "../components/actionButtonTable/actionBut
 import ActionButtonDeleteArticle from "../components/actionButtonTable/actionButtonDeleteArticle";
 import { Menu } from "../types/menu";
 
-export var disabledArticlesList: any[] = []
-
 export default function Home() {
   const [articlesList, setArticlesList] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    const decoded = decodeAccessToken(accessToken);
-    const fetchMenus = async () => {
-      try {
-        const response = await fetch("http://localhost:4000/menu/getMenus", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const data = await response.json();
-        const filteredMenus = data.filter(
-          (menu: Menu) => menu.id_restorer === decoded?.id_user
-        ).map((menu: Menu) => {return menu.id_dish});
-        disabledArticlesList = ([...new Set(filteredMenus)]);
-        console.log(disabledArticlesList)
-      } catch (err) {
-        console.error(err);
-        setError("Failed to fetch menus.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchMenus();
-  }, []);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");

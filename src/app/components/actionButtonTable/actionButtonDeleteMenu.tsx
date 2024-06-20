@@ -11,7 +11,6 @@ export default function ActionButtonDeleteMenu(item: any) {
     }
 
   return (
-    <NextUIProvider>
       <Tooltip className="text-black" content="Êtes-vous sûr de vouloir supprimer ce menu?">
         <Button
           isIconOnly
@@ -22,6 +21,5 @@ export default function ActionButtonDeleteMenu(item: any) {
             <FaTrashCan className="text-default-400 fill-red" />
         </Button>
       </Tooltip>
-    </NextUIProvider>
   );
 }
