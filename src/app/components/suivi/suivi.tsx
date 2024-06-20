@@ -51,24 +51,24 @@ export default function Suivi(props: Suivi) {
 
       <div
         className={`m-0.5 ${
-          props.order_status === "En cours de livraison" ||
-          props.order_status === "Livrée"
+          props.order_status === "in_delivery" ||
+          props.order_status === "done"
             ? "bg-green-500"
             : "bg-red"
         } size-4 rounded-full`}
       ></div>
       <div
         className={`m-0.5 ${
-          props.order_status === "En cours de livraison" ||
-          props.order_status === "Livrée"
+          props.order_status === "in_delivery" ||
+          props.order_status === "done"
             ? "bg-green-500"
             : "bg-red"
         } size-4 rounded-full`}
       ></div>
       <div
         className={`m-0.5 ${
-          props.order_status === "En cours de livraison" ||
-          props.order_status === "Livrée"
+          props.order_status === "in_delivery" ||
+          props.order_status === "done"
             ? "bg-green-500"
             : "bg-red"
         } size-4 rounded-full`}
@@ -79,8 +79,8 @@ export default function Suivi(props: Suivi) {
       >
         <FaTruck
           className={`${
-            props.order_status === "En cours de livraison" ||
-            props.order_status === "Livrée"
+            props.order_status === "in_delivery" ||
+            props.order_status === "done"
               ? "fill-green-500"
               : "fill-red"
           } size-12`}
@@ -89,17 +89,17 @@ export default function Suivi(props: Suivi) {
 
       <div
         className={`m-0.5 ${
-          props.order_status === "Livrée" ? "bg-green-500" : "bg-red"
+          props.order_status === "done" ? "bg-green-500" : "bg-red"
         } size-4 rounded-full`}
       ></div>
       <div
         className={`m-0.5 ${
-          props.order_status === "Livrée" ? "bg-green-500" : "bg-red"
+          props.order_status === "done" ? "bg-green-500" : "bg-red"
         } size-4 rounded-full`}
       ></div>
       <div
         className={`m-0.5 ${
-          props.order_status === "Livrée" ? "bg-green-500" : "bg-red"
+          props.order_status === "done" ? "bg-green-500" : "bg-red"
         } size-4 rounded-full`}
       ></div>
 
@@ -108,7 +108,7 @@ export default function Suivi(props: Suivi) {
       >
         <FaCircleCheck
           className={`${
-            props.order_status === "Livrée" ? "fill-green-500" : "fill-red"
+            props.order_status === "done" ? "fill-green-500" : "fill-red"
           } size-12`}
         />
       </div>
