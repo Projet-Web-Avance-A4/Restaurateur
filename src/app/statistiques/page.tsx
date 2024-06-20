@@ -40,15 +40,12 @@ export default function Home() {
 
         filteredOrders.forEach((order: any) => {
           order.items.forEach((item: any) => {
-            const itemId = item.menu_id || item.drink_id || item.dessert_id;
-            const itemType = item.menu_id
-              ? "menu_id"
-              : item.drink_id
-              ? "drink_id"
-              : item.dessert_id
-              ? "dessert_id"
-              : "article_id";
-            const itemName = item.name;
+            // console.log(item.id_menu || item.id_article)
+            // console.log(item.category_article ? item.category_article : "menu")
+            // console.log(item.name_article || item.name_menu)
+            const itemId = item.id_menu || item.id_article;
+            const itemType = item.category_article ? item.category_article : "menu"
+            const itemName = item.name_article || item.name_menu;
 
             const key = `${itemId}-${itemType}`;
 
@@ -139,6 +136,7 @@ export default function Home() {
               <FaBoxesStacked />
               Votre statistiques
             </h4>
+            <Button onClick={() => console.log(stats)}>Test</Button>
           </CardHeader>
           <CardBody>
             <CustomTable props={props} actionButtons={[]} />
