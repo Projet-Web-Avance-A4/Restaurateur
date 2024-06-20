@@ -5,8 +5,7 @@ import { FaCheck } from "react-icons/fa6";
 export default function ActionButtonModifyArticle(item: any) {
 
   return (
-    <NextUIProvider>
-      <Tooltip className="text-black" content="Valider">
+      <Tooltip className="text-black" content="Modifier l'Article">
         <Button
           as={Link}
           isIconOnly
@@ -18,6 +17,5 @@ export default function ActionButtonModifyArticle(item: any) {
             <FaCheck className="text-default-400 fill-green-500" />
         </Button>
       </Tooltip>
-    </NextUIProvider>
   );
 }

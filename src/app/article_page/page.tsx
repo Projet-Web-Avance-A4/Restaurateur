@@ -18,39 +18,11 @@ import ActionButtonDeleteArticle from "../components/actionButtonTable/actionBut
 import { Menu } from "../types/menu";
 import NotificationSponsorPoints from "../components/sponsorPoints/sponsorPoints";
 
-export var disabledArticlesList: any = []
-
 export default function Home() {
   const [articlesList, setArticlesList] = useState<Article[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    const decoded = decodeAccessToken(accessToken);
-    const fetchMenus = async () => {
-      try {
-        const response = await fetch("http://localhost:4000/menu/getMenus", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const data = await response.json();
-        const filteredMenus = data.filter(
-          (menu: Menu) => menu.id_restorer === decoded?.id_user
-        ).map((menu: Menu) => {return menu.id_dish});
-        disabledArticlesList = ([...new Set(filteredMenus)]);
-        console.log()
-      } catch (err) {
-        console.error(err);
-        setError("Failed to fetch menus.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchMenus();
-  }, []);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -122,8 +94,6 @@ export default function Home() {
   };
 
   return (
-    <NextUIProvider className="h-screen bg-beige flex flex-col">
-      <Header title="Restaurateur" showMyAccount={true} showStats={false} />
       <main className="container mx-auto flex-grow">
         {loading && (
           <div className="flex justify-center m-14">
@@ -159,8 +129,5 @@ export default function Home() {
           </Card>
         )}
       </main>
-      <NotificationSponsorPoints />
-      <Footer />
-    </NextUIProvider>
   );
 }

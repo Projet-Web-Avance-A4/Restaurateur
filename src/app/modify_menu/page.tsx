@@ -1,18 +1,15 @@
 "use client";
-import { NextUIProvider } from "@nextui-org/system";
+
 import { Card, CardBody } from "@nextui-org/card";
-import Header from "../components/header/header";
 import { Button } from "@nextui-org/button";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
   Input,
-  Link,
 } from "@nextui-org/react";
-import Footer from "../components/footer/footer";
 import { decodeAccessToken } from "../utils/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Menu } from "../types/menu";
@@ -20,10 +17,10 @@ import { categories, createMenu, updateMenu } from "./utils";
 import { Article } from "../types/article";
 import MoonLoader from "react-spinners/MoonLoader";
 
-export default function Home() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const id = Number(searchParams.get("id"));
+function Home() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const id = Number(searchParams.get('id'))
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState<number>(0);
@@ -31,7 +28,6 @@ export default function Home() {
   const [dish, setDish] = useState<any>();
   const [allDish, setAllDish] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
-  // const [decoded, setDecoded] = useState<any>();
   const [loading, setLoading] = useState(true);
   const accessToken = localStorage.getItem("accessToken");
   const decoded = decodeAccessToken(accessToken);
@@ -148,8 +144,6 @@ export default function Home() {
   }
 
   return (
-    <NextUIProvider className="min-h-screen bg-beige flex flex-col justify-between">
-      <Header title="Restaurateur" showMyAccount={true} showStats={true} />
       <div className="flex flex-grow justify-center items-center">
         <div className="container mx-auto p-4 md:p-0">
           <div className="md:flex justify-center">
@@ -237,7 +231,13 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Footer />
-    </NextUIProvider>
+  );
+}
+
+export default function HomeWithSuspense() {
+  return (
+    <Suspense>
+      <Home />
+    </Suspense>
   );
 }

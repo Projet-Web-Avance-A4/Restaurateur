@@ -119,8 +119,6 @@ export default function Home() {
   };
 
   return (
-    <NextUIProvider className="h-screen bg-beige flex flex-col">
-      <Header title="Restaurateur" showMyAccount={true} showStats={false} />
       <main className="container mx-auto flex-grow">
         {loading && (
           <div className="flex justify-center m-14">
@@ -156,8 +154,5 @@ export default function Home() {
           </Card>
         )}
       </main>
-      <NotificationSponsorPoints />
-      <Footer />
-    </NextUIProvider>
   );
 }

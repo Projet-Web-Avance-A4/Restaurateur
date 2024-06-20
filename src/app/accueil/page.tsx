@@ -52,21 +52,13 @@ export default function Home() {
   };
 
   return (
-    <NextUIProvider className="h-screen bg-beige">
-      <Header
-        title="Restaurateur"
-        showMyAccount={true}
-        showStats={false}
-      />
       <div className="container mx-auto">
         <div className="flex flex-wrap place-content-center">
-          <CustomCard title="Gestion de vos articles" href="article_page" btnText="Accéder" />
-          <CustomCard title="Gestion de vos menus" href="menu_page" btnText="Accéder" />
-          <CustomCard title="Suivi de vos commandes" href="suivi_commandes" btnText="Accéder" />
+          <CustomCard title="Gestion de vos articles" href="/article_page" btnText="Accéder" />
+          <CustomCard title="Gestion de vos menus" href="/menu_page" btnText="Accéder" />
+          <CustomCard title="Suivi de vos commandes" href="/suivi_commandes" btnText="Accéder" />
+          <CustomCard title="Statistiques" href="/statistiques" btnText="Accéder" />
         </div>
       </div>
-      <NotificationSponsorPoints />
-      <Footer />
-    </NextUIProvider>
   );
 }
