@@ -59,14 +59,14 @@ export default function Home() {
   const items = ordersList.map((item) => ({
     id: item.order_id, //We always need an unique id, but it is never shown. Make sure to used an unique key as value.
     status: dicoStatus[item.order_status as keyof typeof dicoStatus],
-    date: new Date(item.estimated_delivery_time).toLocaleDateString(),
+    date: new Date(item.payment.payment_time).toLocaleDateString(),
     commande: item.items
       .map((commande) => {
-        return commande.name;
+        return (commande.name_article|| commande.name_menu);
       })
       .join(", "),
     payment_method: item.payment.method  == "cash" ? "Liquide" : "Carte de crédit",
-    price: item.price,
+    price: item.total_price,
   }));
 
   const columns = [
