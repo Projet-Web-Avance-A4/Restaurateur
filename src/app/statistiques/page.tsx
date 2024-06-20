@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 import { Order } from "../types/order";
 import MoonLoader from "react-spinners/MoonLoader";
 import { decodeAccessToken } from "../utils/utils";
-import { dicoType } from "./utils";
 import { Menu } from "../types/menu";
 import { Article } from "../types/article";
 
@@ -40,9 +39,6 @@ export default function Home() {
 
         filteredOrders.forEach((order: any) => {
           order.items.forEach((item: any) => {
-            // console.log(item.id_menu || item.id_article)
-            // console.log(item.category_article ? item.category_article : "menu")
-            // console.log(item.name_article || item.name_menu)
             const itemId = item.id_menu || item.id_article;
             const itemType = item.category_article ? item.category_article : "menu"
             const itemName = item.name_article || item.name_menu;
@@ -82,7 +78,7 @@ export default function Home() {
   const items = stats.map((item: any) => ({
     id: item.id, //We always need an unique id, but it is never shown. Make sure to used an unique key as value.
     name: item.name,
-    type: dicoType[item.type as keyof typeof dicoType],
+    type: item.type,
     count: item.count
   }));
 
@@ -100,10 +96,10 @@ export default function Home() {
     option_name: "Type du produit", //Name of the option filter
     option_uid: "type", //ALWAYS A SINGLE STRING, uid of the column filtered with the option
     value_option: [
-      { name: "Menu", uid: "Menu" },
-      { name: "Repas", uid: "Repas" }, // uid need to be exactly the same as item's value. Name is the string to be printed
-      { name: "Boisson", uid: "Boisson" },
-      { name: "Dessert", uid: "Dessert" },
+      { name: "menu", uid: "menu" },
+      { name: "repas", uid: "repas" }, // uid need to be exactly the same as item's value. Name is the string to be printed
+      { name: "boisson", uid: "boisson" },
+      { name: "dessert", uid: "dessert" },
     ],
   };
 
