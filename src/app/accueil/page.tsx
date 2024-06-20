@@ -7,6 +7,7 @@ import CustomCard from "../components/customcard/customcard";
 import Notification from "../components/notification/notification";
 import { useState, useEffect } from 'react';
 import { FaUserLarge, FaChartColumn } from 'react-icons/fa6';
+import NotificationSponsorPoints from "../components/sponsorPoints/sponsorPoints";
 
 const notificationsConfig = [
   {

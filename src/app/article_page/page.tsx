@@ -16,6 +16,7 @@ import { capitalize } from "../utils/capitalize";
 import ActionButtonModifyArticle from "../components/actionButtonTable/actionButtonModifyArticle";
 import ActionButtonDeleteArticle from "../components/actionButtonTable/actionButtonDeleteArticle";
 import { Menu } from "../types/menu";
+import NotificationSponsorPoints from "../components/sponsorPoints/sponsorPoints";
 
 export default function Home() {
   const [articlesList, setArticlesList] = useState<Article[]>([]);
