@@ -5,7 +5,7 @@ import { FaCheck } from "react-icons/fa6";
 export default function ActionButtonModifyMenu(item: any) {
 
   return (
-      <Tooltip className="text-black" content="Valider">
+      <Tooltip className="text-black" content="Modifier le Menu">
         <Button
           as={Link}
           isIconOnly
