@@ -10,7 +10,7 @@ export function updateStatusToInProgress(order_id: number) {
           },
           body: JSON.stringify({
             idOrder: order_id,
-            newStatus: "En cours de préparation",
+            newStatus: "in_progress",
           }),
         }
       );
