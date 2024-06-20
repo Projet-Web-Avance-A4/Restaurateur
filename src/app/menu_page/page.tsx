@@ -15,6 +15,7 @@ import MoonLoader from "react-spinners/MoonLoader";
 import { decodeAccessToken, dicoCategoryMenu } from "../utils/utils";
 import ActionButtonModifyMenu from "../components/actionButtonTable/actionButtonModifyMenu";
 import ActionButtonDeleteMenu from "../components/actionButtonTable/actionButtonDeleteMenu";
+import NotificationSponsorPoints from "../components/sponsorPoints/sponsorPoints";
 
 export default function Home() {
   const [menusList, setMenusList] = useState<Menu[]>([]);
@@ -155,6 +156,7 @@ export default function Home() {
           </Card>
         )}
       </main>
+      <NotificationSponsorPoints />
       <Footer />
     </NextUIProvider>
   );
